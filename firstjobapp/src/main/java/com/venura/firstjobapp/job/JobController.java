@@ -30,7 +30,6 @@ public class JobController {
 
     @GetMapping("/jobs/{id}")
     public Job getJobByIf(@PathVariable Long id){
-        HttpStatus
         Job job = jobService.getJobById(id);
         if(job != null)
             return job;
