@@ -34,7 +34,7 @@ public class JobController {
         Job job = jobService.getJobById(id);
         if(job != null)
             return job;
-        return new Job(1L,"TestJob","TestJob", "2000","2000",
+        return new Job(1L,"sakalabujan","TestJob", "2000","2000",
                 "loc");
     }
 }
