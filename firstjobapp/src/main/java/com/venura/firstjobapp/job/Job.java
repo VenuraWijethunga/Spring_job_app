@@ -14,8 +14,7 @@ public class Job {
     private String maxSalary;
     private String location;
 
-    public Job() {
-    }
+    public Job() {}   //Default constructor.
 
     public Job(long id, String title, String description, String minSalary, String maxSalary, String location) {
         this.id = id;
@@ -29,7 +28,7 @@ public class Job {
     public Long getId() {
         return id;
     }
-
+    
     public void setId(long id) {
         this.id = id;
     }
