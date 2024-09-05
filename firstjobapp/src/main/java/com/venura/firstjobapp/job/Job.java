@@ -24,7 +24,7 @@ public class Job {
         this.maxSalary = maxSalary;
         this.location = location;
     }
-    
+
     public Long getId() {
         return id;
     }

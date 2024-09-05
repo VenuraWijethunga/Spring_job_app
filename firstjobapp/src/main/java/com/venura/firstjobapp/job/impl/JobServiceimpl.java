@@ -1,60 +1,59 @@
 package com.venura.firstjobapp.job.impl;
 
 import com.venura.firstjobapp.job.Job;
+import com.venura.firstjobapp.job.JobRepository;
 import com.venura.firstjobapp.job.JobService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class JobServiceimpl  implements JobService {
 
-    private final List<Job> jobs = new ArrayList<>();
+    //private final List<Job> jobs = new ArrayList<>();
+    JobRepository jobRepository;
     private Long nextID= 1L;
+
+    public JobServiceimpl(JobRepository jobRepository) {
+        this.jobRepository = jobRepository;
+    }
 
     @Override
     public List<Job> findAll() {
-        return jobs;
+        return jobRepository.findAll();
     }
 
     @Override
     public void createJob(Job job) {
         job.setId(nextID++);
-        jobs.add(job);
+        jobRepository.save(job);
     }
 
     @Override
     public Job getJobById(Long id) {
-        for (Job job :
-                jobs) {
-            if (job.getId().equals(id)) {
-                return job;
-            }
-        }
-        return null;
+       return jobRepository.findById(id).orElse(null);
     }
 
     @Override
     public boolean deleteJobById(Long id) {
-        Iterator<Job> iterator = jobs.iterator();
-        while
-            (iterator.hasNext()){
-            Job job = iterator.next();
-            if (job.getId().equals(id)) {
-                iterator.remove();
-                return true;
-            }
+        try {
+            jobRepository.deleteById(id);
+            return true;
+        }catch (Exception e) {
+            return false;
         }
-        return false;
+
     }
 
     @Override
     public boolean updateJob(Long id, Job updatedJob) {
-        for (Job job:
-        jobs) {
-            if (job.getId().equals(id)) {
+        Optional<Job> jobOptional = jobRepository.findById(id);
+
+            if (jobOptional.isPresent()) {
+                Job job = jobOptional.get();
                 job.setTitle(updatedJob.getTitle());
                 job.setDescription(updatedJob.getDescription());
                 job.setMinSalary(updatedJob.getMinSalary());
@@ -62,7 +61,7 @@ public class JobServiceimpl  implements JobService {
                 job.setLocation(updatedJob.getLocation());
 
                 return true;
-            }
+
         }
         return false;
     }
