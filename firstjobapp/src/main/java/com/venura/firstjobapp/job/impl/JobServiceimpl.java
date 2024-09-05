@@ -28,7 +28,6 @@ public class JobServiceimpl  implements JobService {
 
     @Override
     public void createJob(Job job) {
-        job.setId(nextID++);
         jobRepository.save(job);
     }
 
@@ -59,6 +58,7 @@ public class JobServiceimpl  implements JobService {
                 job.setMinSalary(updatedJob.getMinSalary());
                 job.setMaxSalary(updatedJob.getMaxSalary());
                 job.setLocation(updatedJob.getLocation());
+                jobRepository.save(job);
 
                 return true;
 
