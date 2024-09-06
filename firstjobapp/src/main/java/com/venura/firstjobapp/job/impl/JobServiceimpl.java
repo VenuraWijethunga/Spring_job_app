@@ -21,31 +21,7 @@ public class JobServiceimpl  implements JobService {
         this.jobRepository = jobRepository;
     }
 
-    @Override
-    public List<Job> findAll() {
-        return jobRepository.findAll();
-    }
-
-    @Override
-    public void createJob(Job job) {
-        jobRepository.save(job);
-    }
-
-    @Override
-    public Job getJobById(Long id) {
-       return jobRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public boolean deleteJobById(Long id) {
-        try {
-            jobRepository.deleteById(id);
-            return true;
-        }catch (Exception e) {
-            return false;
-        }
-
-    }
+   
 
     @Override
     public boolean updateJob(Long id, Job updatedJob) {
