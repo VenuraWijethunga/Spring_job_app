@@ -16,19 +16,7 @@ public class Job {
 
     public Job() {}   //Default constructor.
 
-    public Job(long id, String title, String description, String minSalary, String maxSalary, String location) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.minSalary = minSalary;
-        this.maxSalary = maxSalary;
-        this.location = location;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
+  
     public void setId(long id) {
         this.id = id;
     }
