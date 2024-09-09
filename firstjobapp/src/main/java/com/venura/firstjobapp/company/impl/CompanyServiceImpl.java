@@ -27,18 +27,21 @@ public class CompanyServiceImpl implements CompanyService {
 
         if (companyOptional.isPresent()) {
             Company companyToUpdate = companyOptional.get();
-            companyToUpdate.setDescription(companyToUpdate.getDescription());
-            companyToUpdate.setName(companyToUpdate.getName());
+            companyToUpdate.setDescription(company.getDescription());
+            companyToUpdate.setName(company.getName());
             companyToUpdate.setJobs(company.getJobs());
 
             companyRepository.save(companyToUpdate);
-
             return true;
-
         }else
         {
-        return false;
+            return false;
         }
+    }
+
+    @Override
+    public void createCompany(Company company) {
+        companyRepository.save(company);
     }
 
 }
