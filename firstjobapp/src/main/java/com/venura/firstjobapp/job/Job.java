@@ -1,5 +1,6 @@
 package com.venura.firstjobapp.job;
 
+import com.venura.firstjobapp.company.Company;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +15,9 @@ public class Job {
     private String maxSalary;
     private String location;
 
+    @ManyToOne
+    private Company company;
+
     public Job() {}   //Default constructor.
 
     public Job(long id, String title, String description, String minSalary, String maxSalary, String location) {
@@ -23,6 +27,14 @@ public class Job {
         this.minSalary = minSalary;
         this.maxSalary = maxSalary;
         this.location = location;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 
     public Long getId() {

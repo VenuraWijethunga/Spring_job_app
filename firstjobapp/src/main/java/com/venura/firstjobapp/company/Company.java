@@ -1,5 +1,6 @@
 package com.venura.firstjobapp.company;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.venura.firstjobapp.job.Job;
 import jakarta.persistence.*;
 
@@ -13,7 +14,8 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany  //One company can be having more Jobs.
+    @JsonIgnore
+    @OneToMany(mappedBy = "company") //One company can be having more Jobs.
     private List<Job> jobs;
 
     //private List<Review> reviews;

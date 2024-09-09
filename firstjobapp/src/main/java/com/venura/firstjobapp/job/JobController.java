@@ -1,5 +1,6 @@
 package com.venura.firstjobapp.job;
 
+  import com.venura.firstjobapp.company.Company;
   import org.springframework.boot.autoconfigure.batch.BatchProperties;
   import org.springframework.http.HttpStatus;
   import org.springframework.http.ResponseEntity;
