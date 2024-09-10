@@ -2,6 +2,7 @@ package com.venura.firstjobapp.company;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.venura.firstjobapp.job.Job;
+import com.venura.firstjobapp.review.Review;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,9 +19,18 @@ public class Company {
     @OneToMany(mappedBy = "company") //One company can be having more Jobs.
     private List<Job> jobs;
 
-    //private List<Review> reviews;
+    @OneToMany(mappedBy = "company")
+    private List<Review> reviews;
 
     public Company() {
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     public String getName() {
