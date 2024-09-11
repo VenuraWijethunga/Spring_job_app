@@ -3,10 +3,7 @@ package com.venura.firstjobapp.review;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +19,10 @@ public class ReviewController {
     @GetMapping("/reviews")
     public ResponseEntity<List<Review>> getAllReviews(@PathVariable Long comapanyId) {
         return new ResponseEntity<>(reviewService.getAllReviews(comapanyId), HttpStatus.OK);
+    }
+
+    @PostMapping("/reviews")
+    public ResponseEntity<String> addReview(@PathVariable Long comapanyId ,@RequestBody Review review) {
+
     }
 }
