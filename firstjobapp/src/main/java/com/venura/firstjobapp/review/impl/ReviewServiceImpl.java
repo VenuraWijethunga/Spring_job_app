@@ -7,7 +7,6 @@ import com.venura.firstjobapp.review.ReviewRepository;
 import com.venura.firstjobapp.review.ReviewService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,11 +28,36 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void addReview(Long companyId, Review review) {
+    public boolean addReview(Long companyId, Review review) {
         Company company = companyService.getCompanyById(companyId);
-        if(company == null) {
+        if(company != null) {
             review.setCompany(company);
             reviewRepository.save(review);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public Review getReview(Long companyId, Long reviewId) {
+        List<Review> reviews = reviewRepository.findByCompanyId(companyId);
+        return reviews.stream()
+                .filter(review -> review.getId().equals(reviewId))
+                .findFirst()
+                .orElse(null);
+    }
+
+    @Override
+    public boolean updateReview(Long companyId, Long reviewId, Review updatedReview) {
+        if(companyService.getCompanyById(companyId) != null) {
+            Company company = companyService.getCompanyById(companyId);
+            updatedReview.setCompany(company);
+            updatedReview.setId(reviewId);
+            reviewRepository.save(updatedReview);
+            return true;
+        }else {
+            return false;
         }
     }
 }
