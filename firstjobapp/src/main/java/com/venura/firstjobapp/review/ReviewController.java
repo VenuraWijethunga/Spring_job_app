@@ -54,7 +54,8 @@ public class ReviewController {
     @DeleteMapping("/reviews/{reviewId}")
     public ResponseEntity<String> deleteReview(@PathVariable Long comapanyId ,@PathVariable Long reviewId) {
 
-        boolean isReviewDeleted = reviewService.deleteReview(comapanyId,reviewId);
+        boolean isReviewDeleted = reviewService.
+        deleteReview(comapanyId,reviewId);
 
         if (isReviewDeleted)
             return new ResponseEntity<>("Review Deleted Successfully",HttpStatus.OK);
