@@ -1,4 +1,4 @@
-package com.embarkx.jobms;
+package com.venura.jobms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

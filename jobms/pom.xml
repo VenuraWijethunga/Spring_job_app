@@ -8,11 +8,11 @@
 		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.embarkx</groupId>
+	<groupId>com.venura</groupId>
 	<artifactId>jobms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>jobms</name>
-	<description>Microservice for Job Application</description>
+	<description>Microservices for Job Application</description>
 	<url/>
 	<licenses>
 		<license/>

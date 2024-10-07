@@ -1,4 +1,4 @@
-package com.embarkx.jobms;
+package com.venura.jobms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
