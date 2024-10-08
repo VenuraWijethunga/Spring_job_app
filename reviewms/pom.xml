@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.venura</groupId>
-	<artifactId>companyms</artifactId>
+	<artifactId>reviewms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>companyms</name>
-	<description>Microservices for Company Application</description>
+	<name>reviewms</name>
+	<description>Microservices for Review Application</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -37,12 +37,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
