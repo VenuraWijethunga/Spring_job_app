@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="postgres" type="docker-deploy" factoryName="docker-image" server-name="Docker">
+    <deployment type="docker-image">
+      <settings>
+        <option name="imageTag" value="postgres:latest" />
+        <option name="containerName" value="postgres" />
+      </settings>
+    </deployment>
+    <method v="2" />
+  </configuration>
+</component>
