@@ -6,6 +6,7 @@ import com.venura.jobms.job.JobRepository;
 import com.venura.jobms.job.JobService;
 import com.venura.jobms.job.dto.JobWithCompanyDTO;
 import com.venura.jobms.job.external.Company;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -20,6 +21,9 @@ public class JobServiceimpl  implements JobService {
     //private final List<Job> jobs = new ArrayList<>();
     JobRepository jobRepository;
     private Long nextID= 1L;
+
+    @Autowired
+    RestTemplate restTemplate;
 
     public JobServiceimpl(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
@@ -40,9 +44,9 @@ public class JobServiceimpl  implements JobService {
             JobWithCompanyDTO jobWithCompanyDTO = new JobWithCompanyDTO();
             jobWithCompanyDTO.setJob(job);
 
-            RestTemplate restTemplate = new RestTemplate();
+            //RestTemplate restTemplate = new RestTemplate();
 
-            Company company = restTemplate.getForObject("http://localhost:8081/companies/" +job.getCompanyId(),
+            Company company = restTemplate.getForObject("http://COMPANY-SERVICE:8081/companies/" +job.getCompanyId(),
                     Company.class);
             jobWithCompanyDTO.setCompany(company);
 
@@ -57,8 +61,9 @@ public class JobServiceimpl  implements JobService {
     }
 
     @Override
-    public Job getJobById(Long id) {
-       return jobRepository.findById(id).orElse(null);
+    public JobWithCompanyDTO getJobById(Long id) {
+        Job job=jobRepository.findById(id).orElse(null);
+          return convertToDto(job);
     }
 
     @Override
