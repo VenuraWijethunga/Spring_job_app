@@ -1,14 +1,14 @@
 package com.venura.jobms.job;
 
-import com.venura.jobms.job.dto.JobWithCompanyDTO;
+import com.venura.jobms.job.dto.JobDTO;
 
 import java.util.List;
 
 public interface JobService {
-    List<JobWithCompanyDTO> findAll();
+    List<JobDTO> findAll();
     void createJob(Job job);
 
-     JobWithCompanyDTO getJobById(Long id);
+     JobDTO getJobById(Long id);
 
     boolean deleteJobById(Long id);
 
