@@ -4,6 +4,8 @@ package com.venura.jobms.job.impl;
 import com.venura.jobms.job.Job;
 import com.venura.jobms.job.JobRepository;
 import com.venura.jobms.job.JobService;
+import com.venura.jobms.job.clients.CompanyClient;
+import com.venura.jobms.job.clients.ReviewClient;
 import com.venura.jobms.job.dto.JobDTO;
 import com.venura.jobms.job.external.Company;
 import com.venura.jobms.job.external.Review;
@@ -30,8 +32,16 @@ public class JobServiceimpl  implements JobService {
     @Autowired
     RestTemplate restTemplate;
 
-    public JobServiceimpl(JobRepository jobRepository) {
+    private CompanyClient companyClient;
+    private ReviewClient reviewClient;
+
+    public JobServiceimpl(JobRepository jobRepository, CompanyClient companyClient,
+                          ReviewClient reviewClient) {
+
         this.jobRepository = jobRepository;
+        this.companyClient = companyClient;
+        this.reviewClient = reviewClient;
+
     }
 
     @Override
@@ -46,26 +56,13 @@ public class JobServiceimpl  implements JobService {
     //Create an own method to connect Job and Company with DTO(Data Transfer Object)
     private JobDTO convertToDto(Job job) {
 
-        //RestTemplate restTemplate = new RestTemplate();
+        Company company = companyClient.getCompany(job.getCompanyId());
+        List<Review> reviews = reviewClient.getReviews(job.getCompanyId());
 
-            Company company = restTemplate.getForObject("http://COMPANY-SERVICE:8081/companies/" +job.getCompanyId(),
-                    Company.class);
+        JobDTO jobDTO = JobMapper.mapToJobWithCompanyDTO(
+                job, company, reviews);
 
-            ResponseEntity<List<Review>> reviewResponse = restTemplate.exchange(
-                    "http://REVIEW-SERVICE:8083/reviews?companyId=" +job.getCompanyId(),
-                    HttpMethod.GET,
-                    null,
-                    new ParameterizedTypeReference<List<Review>>() {});
-
-            List<Review> reviews = reviewResponse.getBody();
-
-            JobDTO jobDTO = JobMapper.
-                    mapToJobWithCompanyDTO(job,company,reviews);
-            //jobDTO.setCompany(company);
-
-            return jobDTO;
-
-
+        return jobDTO;
     }
 
     @Override
